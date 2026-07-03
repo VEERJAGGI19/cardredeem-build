@@ -12,6 +12,8 @@ jobs:
           distribution: 'temurin'
       - name: Unzip plugin source
         run: unzip CardRedeem-plugin-source-1.zip -d plugin
+      - name: Fix Java version in pom.xml
+        run: sed -i 's/<maven.compiler.source>17<\/maven.compiler.source>/<maven.compiler.source>21<\/maven.compiler.source>/; s/<maven.compiler.target>17<\/maven.compiler.target>/<maven.compiler.target>21<\/maven.compiler.target>/' plugin/pom.xml
       - name: Build with Maven
         run: cd plugin && mvn package -q
       - name: Upload JAR
